@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>three.js app</title>
+    <link rel="stylesheet" href="./css/style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="row">
+    <div class= "col-6"id="CanvasFrame"></div>
+    </div>
+    
+    <div class="d-flex flex_column align-item-end" >
+      <div id="test1" class="test"></div>
+      <div id="test2" class="test"></div>
+      <div id="test3" class="test"></div>
+      <div id="test4" class="test"></div>
+    </div>
+
+    <script src="https://threejs.org/build/three.min.js"></script>
+    <script>
+
+    const container = document.getElementById( 'CanvasFrame' );
+      // création du renderer
+      var renderer = new THREE.WebGLRenderer();
+      container.appendChild(renderer.domElement);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      // création de la caméra
+      var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.5, 1000);
+
+      // création de la scène
+      var scene = new THREE.Scene();
+
+      // couleur de fond noire
+      scene.background = new THREE.Color(0, 0, 0);
+
+      // création d'un courbe de Bézier à partir d'un point de départ,
+      // de deux points de contrôle et d'un point d'arrivée.
+      var curve = new THREE.CubicBezierCurve3(
+        
+        new THREE.Vector3( -10, 0, 0 ),
+        new THREE.Vector3( -10, 0, 0 ),
+        new THREE.Vector3( 40, 0, 0 ),
+        new THREE.Vector3( 10, 40, 0 )
+       
+      );
+
+      var points = curve.getPoints(60);
+      var geometry = new THREE.BufferGeometry().setFromPoints(points);
+      var material = new THREE.LineBasicMaterial();
+      var curveObject = new THREE.Line(geometry, material);
+      scene.add(curveObject);
+
+      camera.position.z = 30;
+      camera.position.y = 5
+
+      var sphere = new THREE.Mesh(new THREE.SphereGeometry(0.1));
+      scene.add(sphere);
+
+      var vitesse = 1;
+
+      var start = null;
+      function animate(t) {
+
+       if (sphere.position.x>1){
+        document.getElementById("test1").innerHTML="test1";
+       }
+
+       if (sphere.position.x>2){
+        document.getElementById("test2").innerHTML="test2";
+       }
+
+       if (sphere.position.x>3){
+        document.getElementById("test3").innerHTML="test3";
+       }
+
+       if (sphere.position.x>4){
+        document.getElementById("test4").innerHTML="test4";
+       }
+
+        if (start == null) {
+          start = t;
+        }
+        var delai = t - start;
+        console.log(sphere.position.x);
+
+        curve.getPoint((delai * vitesse * .0001) % 1, sphere.position);
+        
+
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+      requestAnimationFrame(animate);
+    </script>
+  </body>
+</html>

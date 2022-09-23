@@ -1,0 +1,67 @@
+body{
+    margin:0;
+    padding:0;
+}
+
+:root, body{
+    font-family: 'Poppins', sans-serif!important;
+}
+
+
+.color-1 {
+    color: #22597c!important;
+}
+.color-1-dark {
+    color: #041723!important;
+}
+.bg-color-1 {
+    background-color: #00131f!important;
+}
+.color-2 {
+    color: #fdb140!important;
+}
+.bg-color-2 {
+    background-color: #fdb140!important;
+}
+
+
+main>div .container:nth-child(1n)>div {
+    background-color: #e5ecf0!important;
+}
+main>div .container:nth-child(2n)>div {
+    background-color: #f0eee5!important;
+}
+
+main>div .container:nth-child(1n)>div:hover {
+    border: 2px dashed #fdb14080!important;
+    
+    transform: scale(1.0025);
+}
+
+img
+{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+
+#test1{
+    color:aqua;
+    position: absolute;
+}
+
+#Canvas1{
+    background-color: #00131f; 
+    width: auto;
+}
+
+#Canvas2{
+    background-color: #2f5b78; 
+    width: auto;
+}
+#Canvas3{
+    background-color: #5f88a1; 
+    width: auto;
+}
+
